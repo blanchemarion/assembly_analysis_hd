@@ -55,5 +55,37 @@ The properties, triggered-average, and correlation analyses share activation def
 Finally, `summarize_assembly_detection_controls.m` reads completed comparison outputs and creates a compact control summary. It is a script rather than a function; edit the `folders` and `metrics` arrays near its top before running it:
 
 ```matlab
-run('1_Assemblies/summarize_assembly_detection_controls.m')
+run('assembly_analysis_hd/summarize_assembly_detection_controls.m')
 ```
+
+## 3. Complete command to run the detection and analysis
+
+```matlab
+detection = Assem_detection('loadingThreshold',1.75, 'analysisLabel', 'raw_candidates_thr175');
+
+assemblyDir = '/home/blanche/Documents/assembly_analysis_hd';
+addpath(assemblyDir);
+
+inputDir = fullfile(assemblyDir, 'data_processed', 'assemblies', 'raw_candidates_thr175');
+
+saved = load(fullfile(assemblyDir, 'data_processed', 'assemblies', 'session_manifest_thr175.mat'), 'manifest', 'opts');
+
+M = saved.manifest;
+M.outputPath = fullfile(string(inputDir), string(M.morph) + "__" + string(M.recording) + ".mat");
+M = M(isfile(M.outputPath), :);
+assert(height(M) > 0, 'No matching assembly files found.');
+M.status(:) = "existing";
+
+opts = saved.opts;
+opts.analysisLabel = 'raw_candidates_thr175';
+results = struct('manifest', M, 'options', opts);
+
+prop = compare_assembly_properties_across_morphs(results);
+corr = compare_assembly_correlations_across_morphs(results);
+compact = compare_assembly_spatial_compactness_across_morphs(results);
+ATA = compare_assembly_triggered_averages_across_morphs(results);
+
+summarize_assembly_detection_controls;
+```
+
+
