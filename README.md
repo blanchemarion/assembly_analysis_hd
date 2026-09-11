@@ -14,7 +14,7 @@ The main entry point is `Assem_detection.m`:
 results = Assem_detection();
 ```
 
-It finds eligible recordings under `/home/blanche/data/{surface,molino,pachon}/rec*`, applies `QC_ENTRY_KEPT_files.csv`, uses candidate HD cells, and analyzes the first 30 minutes by default. Results and the session manifest are written under `1_Assemblies/data_processed/assemblies`; figures are written under `1_Assemblies/outputs/assemblies`.
+It finds eligible recordings under `/home/blanche/data/{surface,molino,pachon}/rec*`, applies `QC_ENTRY_KEPT_files.csv`, uses candidate HD cells, and analyzes the first 30 minutes by default. Results and the session manifest are written under `assembly_analysis_hd/data_processed/assemblies`; figures are written under `assembly_analysis_hd/outputs/assemblies`.
 
 Detection defaults are defined in `assembly_default_options.m`. The chosen parameter set was chosen to be:
 - `nNullIter`:1000
