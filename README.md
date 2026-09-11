@@ -32,8 +32,6 @@ The principal parameters to review are:
 - Post-processing: `mergeSimilarAssemblies`, `similarityThreshold`, `pruneWeakAssemblies`, and the `prune*` options.
 - Output/reproducibility: `analysisLabel`, `randomSeed`, `makeFigures`, and `overwriteExisting`.
 
-`analysisLabel` should be unique when changing detection settings. `Assem_detection.m` also reads a legacy `data_processed/assemblies/validation/selected_configuration.json` if that file still exists; explicit name/value arguments take precedence over it.
-
 ## 2. Analyze detected assemblies
 
 Pass the returned `results` structure to each analysis. Most analysis functions can also be called with `[]`, in which case they load the saved `session_manifest.mat`.
